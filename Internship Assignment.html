@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Merged Page</title>
+    <style>
+      /* Styles for all sections */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: whitesmoke;
+      }
+
+      /* Styles for the Contact Us section */
+      .contact-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .contact-content {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-start;
+      }
+
+      .right-align {
+        margin-left: 20px;
+      }
+
+      .text-content {
+        max-width: 60%;
+      }
+
+      h1,
+      h4 {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h4 {
+        font-size: 18px;
+        color: red;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: darkred;
+      }
+
+      .right-align {
+        float: right;
+        margin-left: 20px;
+        margin-bottom: 20px;
+      }
+
+      .contact-container {
+        overflow: auto;
+      }
+
+      /* Styles for the popup */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup.active {
+        display: flex;
+      }
+
+      .popup .form {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        width: 600px;
+        height: auto;
+        box-sizing: border-box;
+        text-align: left;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .form-element {
+        margin-bottom: 20px;
+      }
+
+      .form-element label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-element input[type="email"],
+      .form-element input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .form-element input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      .form-element button[type="submit"] {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      /* What We Do section */
+      .what-we-do {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .what-we-do h3 {
+        color: red;
+      }
+
+      .what-we-do h2 {
+        font-size: 24px;
+      }
+
+      .container-images {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .image-container {
+        position: relative;
+        width: 22%;
+        margin: 10px;
+        overflow: hidden;
+      }
+
+      .image {
+        display: block;
+        width: 100%;
+        height: auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 0, 0, 0.7);
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        opacity: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .image-container:hover .overlay {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .text {
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+        max-width: 90%;
+      }
+
+      /* Styles for the "Our Project" section */
+      .our-project {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .our-project h4 {
+        color: red;
+      }
+
+      .our-project h2 {
+        font-size: 24px;
+      }
+
+      .content-wrapper {
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+        justify-content: center;
+      }
+
+      .image-wrapper {
+        width: 50%;
+        padding: 20px;
+      }
+
+      .image-wrapper img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .content {
+        width: 30%;
+        padding: 20px;
+        margin-left: 20px;
+      }
+
+      .content-part {
+        background-color: rgb(240, 240, 240);
+        padding: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .content-part:hover {
+        background-color: red;
+      }
+
+      .content-part h3 {
+        margin-top: 0;
+      }
+
+      .content-part p {
+        margin-bottom: 20px;
+      }
+
+      /* Expert Growth */
+      .extra-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 30px;
+      }
+
+      .extra-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 200px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .extra-card:hover {
+        transform: scale(1.05);
+        z-index: 2;
+      }
+
+      .extra-icon {
+        font-size: 24px;
+        color: #e74c3c;
+      }
+
+      .extra-text {
+        font-size: 14px;
+        color: #333333;
+      }
+
+      .extra-heading {
+        text-align: center;
+        color: red;
+        margin-bottom: 20px;
+      }
+
+      .extra-container h3{
+        color: red;
+        text-align: center;
+      }
+      .extra-container h2 {
+        color: black;
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Contact Us Section -->
+    <div class="contact-container">
+      <div class="contact-content">
+        <img
+          src="contact us.png"
+          alt="contact us"
+          height="400"
+          width="460"
+          class="right-align"
+        />
+        <div class="text-content">
+          <h4 class="highlight">AWARD WINNING</h4>
+          <h1>DIGITAL MARKETING</h1>
+          <h1>AGENCY</h1>
+          <p>
+            Morbi sed lacus nec risus finibus feugiat et fermentum nibh.
+            Pellentesque vitae ante at elit fringilla ac at purus, Morbi sed
+            lacus nec risus finibus feugiat et fermentum
+          </p>
+          <button id="show-popup">Contact Us</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup Form -->
+    <div class="popup">
+      <div class="form">
+        <span class="close-btn">&times;</span>
+        <h2>Talk to us</h2>
+        <div class="form-element">
+          <label for="email">Work email*</label>
+          <input type="email" id="email" placeholder="Enter your email" />
+        </div>
+        <div class="form-element">
+          <div style="display: flex; justify-content: space-between">
+            <div class="form-element">
+              <label for="first-name">First name*</label>
+              <input type="text" id="first-name" placeholder="First Name" />
+            </div>
+            <div class="form-element">
+              <label for="last-name">Last name*</label>
+              <input type="text" id="last-name" placeholder="Last Name" />
+            </div>
+          </div>
+        </div>
+        <div class="form-element">
+          <input type="checkbox" id="agree" />
+          <label for="agree">
+            I agree to Fyle's terms and conditions, and provide consent to send
+            me communication.</label
+          >
+        </div>
+        <div class="form-element">
+          <button type="submit">Contact Us</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We Do Section -->
+    <div class="what-we-do">
+      <h3>WHAT WE DO</h3>
+      <h2>SERVICE PROVIDE FOR YOU</h2>
+      <div class="container-images">
+        <div class="image-container">
+          <img src="contact us.png" alt="Avatar" class="image" />
+          <div class="overlay">
+            <div class="text">
+              WEB DEVELOPMENT
+              <p>
+                Morbi sed lacus nec risus finibus feugiat et fermentum nibh.
+                Pellentesque
+              </p>
+              <a href="#" class="link">READ MORE →</a>
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="Strategy.jpg" alt="Avatar" class="image" />
+          <div class="overlay">
+            <div class="text">
+              STRATEGY DEVELOPMENT
+              <p>
+                Morbi sed lacus nec risus finibus feugiat et fermentum nibh.
+                Pellentesque
+              </p>
+              <a href="#" class="link">READ MORE →</a>
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="slider.png" alt="Avatar" class="image" />
+          <div class="overlay">
+            <div class="text">
+              SLIDER DEVELOPMENT
+              <p>
+                Morbi sed lacus nec risus finibus feugiat et fermentum nibh.
+                Pellentesque
+              </p>
+              <a href="#" class="link">READ MORE →</a>
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="popup.png" alt="Avatar" class="image" />
+          <div class="overlay">
+            <div class="text">
+              POPUP DEVELOPMENT
+              <p>
+                Morbi sed lacus nec risus finibus feugiat et fermentum nibh.
+                Pellentesque
+              </p>
+              <a href="#" class="link">READ MORE →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Project Section -->
+    <div class="our-project">
+      <h3>OUR PROJECT</h3>
+      <h2>WHY WE ARE BEST</h2>
+      <div class="content-wrapper">
+        <div class="image-wrapper">
+          <img src="contact us.png" alt="Image" id="image" />
+        </div>
+        <div class="content">
+          <div class="content-part" onclick="part1()">
+            <h3>Genderless Kei - Japan's Hot</h3>
+            <p>
+              Set to launch on the manufacturer's new A330neo aircraft in 2017,
+              it's offering lots of
+            </p>
+          </div>
+          <div class="content-part" onclick="part2()">
+            <h3>Better Strategy & Quality</h3>
+            <p>
+              Set to launch on the manufacturer's new A330neo aircraft in 2017,
+              it's offering lots of
+            </p>
+          </div>
+          <div class="content-part" onclick="part3()">
+            <h3>Genderless Kei - Japan's Hot</h3>
+            <p>
+              Set to launch on the manufacturer's new A330neo aircraft in 2017,
+              it's offering lots oco
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expert Growth -->
+    <div class="extra-container">
+      <div>
+        <h3>EXPERTS GROWTH</h3>
+      </div>
+      <div>
+        <h2>OUR COMPANY GROWTH</h2>
+      </div>
+
+      <div class="extra-container">
+        <div class="extra-card">
+          <i class="extra-icon">❤️</i>
+          <h3>199 +</h3>
+          <p class="extra-text">Satisfied Customers</p>
+        </div>
+        <div class="extra-card">
+          <i class="extra-icon">🕓</i>
+          <h3>1591+</h3>
+          <p class="extra-text">Days Of Operation</p>
+        </div>
+        <div class="extra-card">
+          <i class="extra-icon">✅</i>
+          <h3>283 +</h3>
+          <p class="extra-text">Completed Projects</p>
+        </div>
+        <div class="extra-card">
+          <i class="extra-icon">🏆</i>
+          <h3>75+</h3>
+          <p class="extra-text">Awards Won</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("show-popup")
+        .addEventListener("click", function () {
+          document.querySelector(".popup").classList.add("active");
+        });
+
+      document
+        .querySelector(".close-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".popup").classList.remove("active");
+        });
+
+      var myImage = document.querySelector("#image");
+      function part1() {
+        myImage.src = "contact us.png";
+      }
+
+      function part2() {
+        myImage.src = "Strategy.jpg";
+      }
+
+      function part3() {
+        myImage.src = "contact us.png";
+      }
+    </script>
+  </body>
+</html>
